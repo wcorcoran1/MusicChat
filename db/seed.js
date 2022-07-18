@@ -5,6 +5,7 @@ async function buildTables() {
     console.log("----Dropping tables----");
     await client.query(`
     DROP TABLE IF EXISTS posts
+    DROP TABLE IF EXISTS genres
       DROP TABLE IF EXISTS users;
       `);
     // drop tables in correct order
@@ -25,10 +26,16 @@ const createTables = async () => {
         username VARCHAR(255) UNIQUE NOT NULL,
          password VARCHAR(255) NOT NULL,
       )
-      CREATE TABLE posts
+        CREATE TABLE genres(
+        id SERIAL PRIMARY KEY,
+        genre VARCHAR(255) NOT NULL
+      )
+      CREATE TABLE posts(
       id SERIAL PRIMARY KEY,
       "authorId" INTEGER REFERENCES users(id),
+      "genreId" INTEGER REFERENCES genres(id),
       content VARCHAR(300) NOT NULL,
+      )
         `);
       console.log("-----TABLES BUILT-----");
     } catch (error) {
