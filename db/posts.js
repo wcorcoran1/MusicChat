@@ -24,4 +24,35 @@ async function getAllPosts(){
         throw error
     }
 }
-async function updatePosts({})
+
+async function updatePosts({ id, ...fields }){
+    try{
+    const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ")
+    if(setString.length === 0){
+        return;
+    }
+    const {rows: [posts]} = await client.query(`
+    UPDATE posts 
+    SET ${setString}
+    WHERE id=${id}
+    RETURNING *;
+    `, Object.values(fields));
+    return posts
+    } catch(error){
+        throw error
+    }
+}
+
+async function delatePosts(id){
+    try{
+        const { rows: [posts]} = await client.query(`
+        DELETE FROM posts 
+        WHERE id = $1
+        `, [id])
+     return posts
+    } catch(error){
+        throw error
+    }
+}
