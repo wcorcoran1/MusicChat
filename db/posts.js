@@ -18,10 +18,12 @@ async function createPosts({ authorId, genreId, content }){
 async function getAllPosts(){
     try{
         const{rows: [posts]} = await client.query(`
-        SELECT posts.* , genres.name AS "music"
+        SELECT posts.* , genres.name AS "music", users.username AS "creatorName"
         FROM posts
         JOIN genres
-        ON posts."genreId" = genres.id`);
+        ON posts."genreId" = genres.id
+        JOIN users 
+        ON posts."authorId" = users.id`);
         return posts
     }catch (error){
         throw error
