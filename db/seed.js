@@ -28,7 +28,7 @@ const createTables = async () => {
       )
         CREATE TABLE genres(
         id SERIAL PRIMARY KEY,
-        genre VARCHAR(255) NOT NULL
+        name VARCHAR(255) NOT NULL
       )
       CREATE TABLE posts(
       id SERIAL PRIMARY KEY,

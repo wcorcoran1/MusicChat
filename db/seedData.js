@@ -1,32 +1,32 @@
 // Where the data for the database is kept
 const users = [
 {
-    username: "MetalHead24",
     email:  "metalforever@mail.com",
+    username: "MetalHead24",
     password: "MetalHead1"
 },
 {
+    email: "soccerMom86@Karen.com",
 username: "soccerMom",
-email: "soccerMom86@Karen.com",
 password: "Mykidrocks"
 },
 {
-    username: "OGHipHop",
     email: "James23@mail.com",
+    username: "OGHipHop",
     password: "2PacForever"
 },
 {
-    username: "musicLover1",
     email: "MusicIsLife@mail.com",
+    username: "musicLover1",
     password: "MusicIsLife1"
 }
 ]
 const genres = [
-{genre: "Metal"},
-{genre: "POP"},
-{genre: "Hip-Hop"},
-{genre: "Country"},
-{genre: "Classic Rock"}
+{name: "Metal"},
+{name: "POP"},
+{name: "Hip-Hop"},
+{name: "Country"},
+{name: "Classic Rock"}
 ]
 
 const posts = [
