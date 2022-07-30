@@ -18,7 +18,10 @@ async function createPosts({ authorId, genreId, content }){
 async function getAllPosts(){
     try{
         const{rows: [posts]} = await client.query(`
-        SELECT * FROM posts`);
+        SELECT posts.* , genres.name AS "music"
+        FROM posts
+        JOIN genres
+        ON posts."genreId" = genres.id`);
         return posts
     }catch (error){
         throw error
@@ -45,7 +48,7 @@ async function updatePosts({ id, ...fields }){
     }
 }
 
-async function delatePosts(id){
+async function deletePosts(id){
     try{
         const { rows: [posts]} = await client.query(`
         DELETE FROM posts 
@@ -55,4 +58,28 @@ async function delatePosts(id){
     } catch(error){
         throw error
     }
+}
+
+async function getPostsById (id){
+    try{
+        const { rows: [posts]} = await client.query(`
+        SELECT * FROM posts 
+        WHERE id = $1
+        `,[id])
+    return posts
+    } catch (error){
+        throw error
+    }
+}
+
+async function getPostsByGenre(name){
+
+}
+
+module.exports = {
+createPosts,
+getAllPosts,
+getPostsById,
+updatePosts,
+deletePosts,
 }
