@@ -1,6 +1,7 @@
 
 const client = require("./client");
-
+const { getGenreById } = require("./genres")
+const { getUserByUsername } = require("./users")
 async function createPosts({ authorId, genreId, content }){
     try{
         const {
@@ -75,7 +76,36 @@ async function getPostsById (id){
 }
 
 async function getPostsByGenre(name){
+try{
+    const genre = await getGenreById
+    const {rows: posts} = await client.query(`
+    SELECT posts.*, genres.name AS "music"
+    FROM posts
+    JOIN genres 
+    ON posts."genreId" = genres.id
+    WHERE genres.id = $1
+    `, [genre.id])
+    return posts
+}catch(error){
+    throw error
+}
+}
 
+async function getPostsByAuthorId(username){
+    try{
+const user = await getUserByUsername(username)
+
+const { rows: posts } = await client.query(`
+SELECT posts.*, users.username AS "authorId"
+FROM posts
+JOIN users
+ON users."authorid" = users.id
+WHERE users.id = $1
+`, [user.id])
+return posts
+    }catch(error){
+        throw error
+    }
 }
 
 module.exports = {
@@ -84,4 +114,7 @@ getAllPosts,
 getPostsById,
 updatePosts,
 deletePosts,
+getPostsById,
+getPostsByGenre,
+getPostsByAuthorId,
 }
