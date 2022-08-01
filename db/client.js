@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-const DB_NAME = "MusicChat";
+const DB_NAME = "musicChat";
 const client = new Client({
   connectionString:
     process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`,

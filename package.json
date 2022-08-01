@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.js",
     "build": "react-scripts build",
-    "db:build": "node ./db/seedData.js",
+    "db:build": "node ./db/seed.js",
     "seed": "node ./db/seed",
     "client-dev": "react-scripts start",
     "server:dev": "nodemon index.js"

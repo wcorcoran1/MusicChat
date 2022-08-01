@@ -46,3 +46,5 @@ const posts = [
         content: "2pac is the greatest rapper, come at me if you disagree"
     }
 ]
+
+module.exports = { users, genres, posts}
