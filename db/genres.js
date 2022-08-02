@@ -57,9 +57,43 @@ async function getGenreByName(name){
     }
 }
 
+async function updateGenres({ id, ...fields }){
+    try{
+    const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ")
+    if(setString.length === 0){
+        return;
+    }
+    const {rows: [genres]} = await client.query(`
+    UPDATE genres 
+    SET ${setString}
+    WHERE id=${id}
+    RETURNING *;
+    `, Object.values(fields));
+    return genres
+    } catch(error){
+        throw error
+    }
+}
+
+async function deleteGenres(id){
+    try{
+        const { rows: [genres]} = await client.query(`
+        DELETE FROM genres
+        WHERE id = $1
+        `, [id])
+     return genres
+    } catch(error){
+        throw error
+    }
+}
+
 module.exports = {
     createGenres,
     getAllGenres,
     getGenreById,
-    getGenreByName
+    getGenreByName,
+    updateGenres,
+    deleteGenres
 }
