@@ -3,6 +3,7 @@
 const express = require("express");
 const apiRouter = express.Router();
 const userRouter = require("./users");
+const genresRouter = require("./genres");
 
 const jwt = require("jsonwebtoken");
 const { getUserById } = require("../db");
@@ -21,6 +22,8 @@ apiRouter.get("/health", (req, res, next) => {
 });
 
 apiRouter.use("/users", userRouter);
+apiRouter.use("/genres", genresRouter)
+
 
 // Require user if possible
 apiRouter.use(async (req, res, next) => {

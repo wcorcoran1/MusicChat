@@ -1,7 +1,7 @@
 //IMPORTS FOR Genres API ROUTES
 const express = require("express");
 const genresRouter = express.Router();
-const { createGenres, getAllGenres, getGenreById } = require("../db");
+const { createGenres, getAllGenres, getGenreById, updateGenres, deleteGenres } = require("../db");
 const { loginAuth } = require("./utils");
 
 genresRouter.get("/", loginAuth, async (req, res, next) => {
@@ -51,7 +51,7 @@ genresRouter.delete("./:genresId", loginAuth, async (req, res, next) => {
   const id = req.params.genresId;
 
   try {
-    const genres = await deletegenres({ id });
+    const genres = await deleteGenres({ id });
     res.send(genres);
   } catch (error) {
     next(error);
