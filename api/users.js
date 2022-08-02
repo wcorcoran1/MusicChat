@@ -17,7 +17,7 @@ userRouter.use((req, res, next) => {
 by using the getUserName and createUser functions from the database*/
 userRouter.post("/register", async (req, res, next) => {
   // console.log("Register Connected!!!");
-  const { name, email, username, password } = req.body;
+  const { email, username, password } = req.body;
   try {
     // console.log("Name for req.body",name)
   //  variable that waits for getUserName function to run
@@ -27,7 +27,6 @@ userRouter.post("/register", async (req, res, next) => {
       
       const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
       const user = await createUser({
-        name,
         email,
         username,
         password: hashedPassword,
@@ -111,8 +110,8 @@ userRouter.get("/me", loginAuth, async (req, res, next) => {
   console.log(req, "/me route")
   try {
     res.send(req.user);
-  } catch ({ name, message }) {
-    next({ name, message });
+  } catch ({ username, message }) {
+    next({ username, message });
   }
 });
 
