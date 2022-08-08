@@ -6,7 +6,6 @@ const {
   getPostsById,
   updatePosts,
   deletePosts,
-  getPostsById,
   getPostsByGenre,
   getPostsByAuthorId,
 } = require("../db");
@@ -31,7 +30,7 @@ postsRouter.get("/:postsId", loginAuth, async (req, res, next) => {
   }
 });
 
-postsRouter.get("/:genreId", loginAuth, async (req, res, next) => {
+postsRouter.get("/genre:genreId", loginAuth, async (req, res, next) => {
   try {
     const { genreId } = req.params;
     const posts = await getPostsByGenre(genreId);
@@ -64,7 +63,7 @@ postsRouter.patch("/:postsId", loginAuth, async (req, res, next) => {
   }
 });
 
-routineRouter.delete("/:postsId",loginAuth, async (req, res, next)=>{
+postsRouter.delete("/:postsId",loginAuth, async (req, res, next)=>{
     const id = req.params
     try{
         const deletePost = await deletePosts(id)

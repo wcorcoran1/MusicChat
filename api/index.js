@@ -4,6 +4,7 @@ const express = require("express");
 const apiRouter = express.Router();
 const userRouter = require("./users");
 const genresRouter = require("./genres");
+const postsRouter = require("./posts")
 
 const jwt = require("jsonwebtoken");
 const { getUserById } = require("../db");
@@ -23,6 +24,7 @@ apiRouter.get("/health", (req, res, next) => {
 
 apiRouter.use("/users", userRouter);
 apiRouter.use("/genres", genresRouter)
+apiRouter.use("/posts", postsRouter)
 
 
 // Require user if possible
