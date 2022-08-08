@@ -43,6 +43,11 @@ res.send(posts)
 
 postsRouter.post("/", loginAuth, async(req, res, next)=>{
     try{
+        const { content } = req.body
+        const { authorId } = req.user
+        const { genreId } = req.genre
+        const post = await createPosts({ authorId, genreId, content })
+        res.send(post)
     }catch(error){
         throw error
     }

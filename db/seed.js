@@ -2,7 +2,7 @@ const client = require("./client");
 const { users, genres, posts } = require("./seedData");
 const { createGenres, getGenreById } = require("./genres");
 const { createUser } = require("./users");
-const { createPosts } = require("./posts");
+const { createPosts, getAllPosts, getPostsById } = require("./posts");
 async function dropTables() {
   try {
     console.log("----Dropping tables----");
@@ -58,6 +58,12 @@ async function seedDB() {
   const createPost = await Promise.all(posts.map(createPosts));
   console.log("POSTS:", createPost);
 }
+// TESTING DB Functions
+// async function testDB(){
+//   console.log("All posts....")
+//   const allPosts = await getAllPosts()
+//   console.log("ALL POSTS", allPosts)
+// }
 
 async function populateInitialData() {
   try {
@@ -65,6 +71,7 @@ async function populateInitialData() {
     await dropTables();
     await buildTables();
     await seedDB();
+    // await testDB();
   } catch (error) {
     throw error;
   }
